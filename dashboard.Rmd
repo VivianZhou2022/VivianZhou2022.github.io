@@ -47,7 +47,10 @@ ny_noaa %>%
     year = as.numeric(year)) %>%
   group_by(id, year) %>%
   summarize(mean_snwf = mean(snow_mm), mean_snwd = mean(snwd_mm)) %>% 
-  plot_ly(x = ~mean_snwf, y = ~mean_snwd, type = "scatter", mode = "markers", alpha = 0.5,color = ~year)
+  plot_ly(x = ~mean_snwf, y = ~mean_snwd, type = "scatter", mode = "markers", alpha = 0.5,color = ~year) %>%
+  layout(
+    title = "Relationship Between Snowfall and Snow depth"
+  )
 
 ```
 
@@ -64,7 +67,9 @@ ny_noaa  %>%
   group_by(id, year) %>%
   summarize(avg_tmin = mean(tmin_ºC)) %>%
   plot_ly(x = ~year, y = ~avg_tmin, type = "box", 
-          alpha = .5,color = ~year, colors = "viridis")
+          alpha = .5,color = ~year, colors = "viridis") %>%
+  layout(
+    title = "Average tmin over years")
 ```
 
 ### Chart C
@@ -77,6 +82,8 @@ ny_noaa %>%
     year = as.factor(year)) %>%
   count(year) %>% 
   mutate(year = fct_reorder(year, n)) %>% 
-  plot_ly(x = ~year, y = ~n, color = ~year, type = "bar")
+  plot_ly(x = ~year, y = ~n, color = ~year, type = "bar") %>%
+  layout(
+    title = "Observations in each year")
 ```
 
